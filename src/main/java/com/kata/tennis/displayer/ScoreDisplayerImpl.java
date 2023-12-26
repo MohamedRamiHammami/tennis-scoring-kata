@@ -44,16 +44,12 @@ public class ScoreDisplayerImpl implements ScoreDisplayer {
 	}
 
 	private static String formatScore(int score) {
-		switch (score) {
-		case 0:
-			return DisplayedPlayerScore.ZERO.value();
-		case 1:
-			return DisplayedPlayerScore.FIFTEEN.value();
-		case 2:
-			return DisplayedPlayerScore.THIRTY.value();
-		default:
-			return DisplayedPlayerScore.FORTY.value();
-		}
+		return switch (score) {
+		case 0 -> DisplayedPlayerScore.ZERO.value();
+		case 1 -> DisplayedPlayerScore.FIFTEEN.value();
+		case 2 -> DisplayedPlayerScore.THIRTY.value();
+		default -> DisplayedPlayerScore.FORTY.value();
+		};
 	}
 
 }

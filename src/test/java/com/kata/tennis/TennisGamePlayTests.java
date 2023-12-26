@@ -68,7 +68,7 @@ class TennisGamePlayTests {
 
 	@Test
 	void invalidInput() {
-		when(displayer.displayScore(any())).thenReturn(new ScoreDiplay("", false));
+		when(displayer.displayScore(any())).thenReturn(new ScoreDiplay(""));
 
 		InvalidInputException exception = assertThrows(InvalidInputException.class, () -> {
 			gamePlay.playGame(AABCAB);
@@ -88,8 +88,8 @@ class TennisGamePlayTests {
 
 	@Test
 	void cleanWinPlayer() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00, false), new ScoreDiplay(A30_B00, false),
-				new ScoreDiplay(A40_B00, false), new ScoreDiplay(PLAYER_A_WINS, true));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00), new ScoreDiplay(A30_B00),
+				new ScoreDiplay(A40_B00), new ScoreDiplay(PLAYER_A_WINS, true));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
@@ -102,8 +102,8 @@ class TennisGamePlayTests {
 
 	@Test
 	void cleanWinOpponent() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15, false), new ScoreDiplay(A00_B30, false),
-				new ScoreDiplay(A00_B40, false), new ScoreDiplay(PLAYER_B_WINS, true));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15), new ScoreDiplay(A00_B30),
+				new ScoreDiplay(A00_B40), new ScoreDiplay(PLAYER_B_WINS, true));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
@@ -116,8 +116,8 @@ class TennisGamePlayTests {
 
 	@Test
 	void playerWinTo30() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00, false), new ScoreDiplay(A15_B15, false),
-				new ScoreDiplay(A30_B15, false), new ScoreDiplay(A30_B30, false), new ScoreDiplay(A40_B30, false),
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00), new ScoreDiplay(A15_B15),
+				new ScoreDiplay(A30_B15), new ScoreDiplay(A30_B30), new ScoreDiplay(A40_B30),
 				new ScoreDiplay(PLAYER_A_WINS, true));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
@@ -131,8 +131,8 @@ class TennisGamePlayTests {
 
 	@Test
 	void opponentWinTo30() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15, false), new ScoreDiplay(A15_B15, false),
-				new ScoreDiplay(A15_B30, false), new ScoreDiplay(A30_B30, false), new ScoreDiplay(A30_B40, false),
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15), new ScoreDiplay(A15_B15),
+				new ScoreDiplay(A15_B30), new ScoreDiplay(A30_B30), new ScoreDiplay(A30_B40),
 				new ScoreDiplay(PLAYER_B_WINS, true));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
@@ -146,9 +146,9 @@ class TennisGamePlayTests {
 
 	@Test
 	void advPlayer() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00, false), new ScoreDiplay(A15_B15, false),
-				new ScoreDiplay(A30_B15, false), new ScoreDiplay(A30_B30, false), new ScoreDiplay(A40_B30, false),
-				new ScoreDiplay(A40_B40, false), new ScoreDiplay(AAdv_B40, false));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00), new ScoreDiplay(A15_B15),
+				new ScoreDiplay(A30_B15), new ScoreDiplay(A30_B30), new ScoreDiplay(A40_B30), new ScoreDiplay(A40_B40),
+				new ScoreDiplay(AAdv_B40));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
@@ -162,9 +162,9 @@ class TennisGamePlayTests {
 
 	@Test
 	void advOpponent() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15, false), new ScoreDiplay(A15_B15, false),
-				new ScoreDiplay(A15_B30, false), new ScoreDiplay(A30_B30, false), new ScoreDiplay(A30_B40, false),
-				new ScoreDiplay(A40_B40, false), new ScoreDiplay(A40_BAdv, false));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15), new ScoreDiplay(A15_B15),
+				new ScoreDiplay(A15_B30), new ScoreDiplay(A30_B30), new ScoreDiplay(A30_B40), new ScoreDiplay(A40_B40),
+				new ScoreDiplay(A40_BAdv));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
@@ -177,10 +177,9 @@ class TennisGamePlayTests {
 
 	@Test
 	void playertWinsAfterAdv() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00, false), new ScoreDiplay(A15_B15, false),
-				new ScoreDiplay(A30_B15, false), new ScoreDiplay(A30_B30, false), new ScoreDiplay(A40_B30, false),
-				new ScoreDiplay(A40_B40, false), new ScoreDiplay(AAdv_B40, false),
-				new ScoreDiplay(PLAYER_A_WINS, false));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00), new ScoreDiplay(A15_B15),
+				new ScoreDiplay(A30_B15), new ScoreDiplay(A30_B30), new ScoreDiplay(A40_B30), new ScoreDiplay(A40_B40),
+				new ScoreDiplay(AAdv_B40), new ScoreDiplay(PLAYER_A_WINS));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
@@ -193,10 +192,9 @@ class TennisGamePlayTests {
 
 	@Test
 	void opponentWinsAfterAdv() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15, false), new ScoreDiplay(A15_B15, false),
-				new ScoreDiplay(A15_B30, false), new ScoreDiplay(A30_B30, false), new ScoreDiplay(A30_B40, false),
-				new ScoreDiplay(A40_B40, false), new ScoreDiplay(A40_BAdv, false),
-				new ScoreDiplay(PLAYER_B_WINS, false));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A00_B15), new ScoreDiplay(A15_B15),
+				new ScoreDiplay(A15_B30), new ScoreDiplay(A30_B30), new ScoreDiplay(A30_B40), new ScoreDiplay(A40_B40),
+				new ScoreDiplay(A40_BAdv), new ScoreDiplay(PLAYER_B_WINS));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
@@ -209,8 +207,8 @@ class TennisGamePlayTests {
 
 	@Test
 	void extraInput() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00, false), new ScoreDiplay(A30_B00, false),
-				new ScoreDiplay(A40_B00, false), new ScoreDiplay(PLAYER_A_WINS, true));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00), new ScoreDiplay(A30_B00),
+				new ScoreDiplay(A40_B00), new ScoreDiplay(PLAYER_A_WINS, true));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
@@ -223,10 +221,10 @@ class TennisGamePlayTests {
 
 	@Test
 	void longGame() {
-		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00, false), new ScoreDiplay(A15_B15, false),
-				new ScoreDiplay(A30_B15, false), new ScoreDiplay(A30_B30, false), new ScoreDiplay(A40_B30, false),
-				new ScoreDiplay(A40_B40, false), new ScoreDiplay(AAdv_B40, false), new ScoreDiplay(A40_B40, false),
-				new ScoreDiplay(A40_BAdv, false), new ScoreDiplay(A40_B40, false));
+		List<ScoreDiplay> scoresDisplay = List.of(new ScoreDiplay(A15_B00), new ScoreDiplay(A15_B15),
+				new ScoreDiplay(A30_B15), new ScoreDiplay(A30_B30), new ScoreDiplay(A40_B30), new ScoreDiplay(A40_B40),
+				new ScoreDiplay(AAdv_B40), new ScoreDiplay(A40_B40), new ScoreDiplay(A40_BAdv),
+				new ScoreDiplay(A40_B40));
 		AtomicInteger invocationCount = new AtomicInteger(0);
 		when(displayer.displayScore(any())).thenAnswer(invocation -> {
 			return scoresDisplay.get(invocationCount.getAndIncrement());
